@@ -22,7 +22,12 @@ class ProductList extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               leading: Text('头部${products![index].title}'),
-              title: Text('标题${products![index].description}'),
+              title: ElevatedButton(
+                child: Text('标题${products![index].description}'),
+                onPressed: () {
+                  _navagateToDetail(context);
+                },
+              ),
               subtitle: Text('副标题${products![index].subtitle}'),
               onTap: () {
                 //匿名函数，实现导航功能--类似于a标签
@@ -34,6 +39,31 @@ class ProductList extends StatelessWidget {
               },
             );
           }),
+    );
+  }
+
+  _navagateToDetail(BuildContext context) async {
+    final res = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => AnotherProductDetail()));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$res')));
+  }
+}
+
+class AnotherProductDetail extends StatelessWidget {
+  const AnotherProductDetail({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('商品信息2')),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('返回'),
+          onPressed: () {
+            Navigator.pop(context, '我回来了');//
+          },
+        ),
+      ),
     );
   }
 }
@@ -57,7 +87,7 @@ void main() {
   runApp(MaterialApp(
     title: 'list加navi加数据传递及接收',
     home: ProductList(
-        products:
-            List.generate(20, (index) => Product('标题$index', '商品描述$index', '副标题$index'))),
+        products: List.generate(
+            20, (index) => Product('标题$index', '商品描述$index', '副标题$index'))),
   ));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './pages/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,10 +15,8 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('这里是appbar'),
         ),
-        body: Text(
-          'body'
-        ),
-      ),
+        body: Center(child: HomePage()),
+      )
     );
   }
 }

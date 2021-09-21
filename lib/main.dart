@@ -25,7 +25,7 @@ class ProductList extends StatelessWidget {
               title: ElevatedButton(
                 child: Text('标题${products![index].description}'),
                 onPressed: () {
-                  _navagateToDetail(context);
+                  _navagateToDetail(context, index);
                 },
               ),
               subtitle: Text('副标题${products![index].subtitle}'),
@@ -42,25 +42,30 @@ class ProductList extends StatelessWidget {
     );
   }
 
-  _navagateToDetail(BuildContext context) async {
-    final res = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => AnotherProductDetail()));
+  _navagateToDetail(BuildContext context, index) async {
+    final res = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AnotherProductDetail(product: products![index],)
+      )
+    );
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$res')));
   }
 }
 
 class AnotherProductDetail extends StatelessWidget {
-  const AnotherProductDetail({Key? key}) : super(key: key);
+  final Product? product;
+  const AnotherProductDetail({Key? key, this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('商品信息2')),
+      appBar: AppBar(title: Text('商品信息${product?.title}')),
       body: Center(
         child: ElevatedButton(
-          child: Text('返回'),
+          child: Text('这个商品的索引是${product?.title}，点击返回'),
           onPressed: () {
-            Navigator.pop(context, '我回来了');//
+            Navigator.pop(context, '我是${product?.description}，我回来了'); //
           },
         ),
       ),

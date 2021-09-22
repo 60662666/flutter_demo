@@ -63,7 +63,7 @@ class AnotherProductDetail extends StatelessWidget {
       appBar: AppBar(title: Text('商品信息${product?.title}')),
       body: Center(
         child: ElevatedButton(
-          child: Text('这个商品的索引是${product?.title}，点击返回'),
+          child: Text('这个商品的标题是${product?.title}，点击返回'),
           onPressed: () {
             Navigator.pop(context, '我是${product?.description}，我回来了'); //
           },

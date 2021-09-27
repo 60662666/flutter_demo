@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './sub_stateful_widget.dart';
+import './clock.dart';
 
 class TestStatefulWidget extends StatefulWidget {
   @override
@@ -76,7 +77,8 @@ class TestState extends State<TestStatefulWidget> {
                 fontSize: 26.0, color: Color.fromARGB(155, 155, 155, 150)),
           )
         ),
-        SubStatefulWidget()
+        SubStatefulWidget(),
+        Clock()
       ],
     );
   }
